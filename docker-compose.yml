@@ -19,6 +19,7 @@ services:
   backend:
     build: 
       context: ./backend
+    image: ak3806/smart-rental-backend:latest
     container_name: smart_rental_backend
     restart: always
     ports:
@@ -36,6 +37,7 @@ services:
   frontend:
     build:
       context: ./frontend
+    image: ak3806/smart-rental-frontend:latest
     container_name: smart_rental_frontend
     restart: always
     ports:
