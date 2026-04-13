@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Change this to match your XAMPP htdocs path
-export const BASE_URL = 'http://localhost/smart-rental-assistant/backend/';
+// Change this to match your XAMPP or Docker backend path
+export const BASE_URL = 'http://localhost:8080/backend/';
 
 const api = axios.create({
   baseURL: BASE_URL,

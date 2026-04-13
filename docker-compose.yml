@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Database Service
+  db:
+    image: mysql:8.0
+    container_name: smart_rental_db_container
+    restart: always
+    environment:
+      MYSQL_DATABASE: smart_rental_db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+      - db_data:/var/lib/mysql
+
+  # Backend Service (PHP & Apache)
+  backend:
+    build: 
+      context: ./backend
+    container_name: smart_rental_backend
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=smart_rental_db
+      - DB_USER=root
+      - DB_PASS=rootpassword
+      - DB_PORT=3306
+    depends_on:
+      - db
+
+  # Frontend Service (React & Nginx)
+  frontend:
+    build:
+      context: ./frontend
+    container_name: smart_rental_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

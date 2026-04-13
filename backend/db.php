@@ -3,11 +3,11 @@
 // Smart Rental Assistant - Database Connection (PDO)
 // ============================================================
 
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'smart_rental_db');
-define('DB_USER', 'root'); // Change if your MySQL user is different
-define('DB_PASS', '12345'); // Change to your MySQL password
-define('DB_PORT', '3301');
+define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+define('DB_NAME', getenv('DB_NAME') ?: 'smart_rental_db');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '12345');
+define('DB_PORT', getenv('DB_PORT') ?: '3301');
 
 function getDB()
 {
